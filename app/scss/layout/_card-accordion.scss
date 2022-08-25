@@ -45,7 +45,7 @@ main {
       left: -5rem;
       background-image: url("/images/illustration-woman-online-desktop.svg"),
         url("/images/bg-pattern-desktop.svg");
-      background-position: 15px 63px, -375px -235px;
+      background-position: 15px 63px, -385px -235px;
       background-repeat: no-repeat;
       background-size: 25rem, 50rem;
     }
@@ -77,6 +77,7 @@ main {
     }
   }
 }
+
 h3 {
   text-align: center;
   font-size: u.rem(30);
@@ -87,10 +88,13 @@ h3 {
     text-align: left;
   }
 }
+
 .accordion {
-  padding-inline: u.rem(20);
+  padding-inline: u.rem(35);
+  padding-block: u.rem(45);
+  margin-top: u.rem(30);
   @include u.breakpoint-up(medium) {
-    width: 350px;
+    width: u.rem(350);
     display: flex;
     flex-direction: column;
     margin-right: u.rem(100);
@@ -105,37 +109,65 @@ h3 {
   font-size: u.rem(14);
   cursor: pointer;
   padding-block: u.rem(10);
-  -webkit-transition: max-height 0.4s ease-in-out, opacity 0.2s ease-in-out;
-  -o-transition: max-height 0.4s ease-in-out, opacity 0.2s ease-in-out;
-  transition: max-height 0.4s ease-in-out, opacity 0.2s ease-in-out;
+
   &:after {
     content: url("/images/icon-arrow-down.svg");
     float: right;
-    margin-left: 5px;
+    margin-left: u.rem(5);
   }
   &:active,
   &:focus {
+    color: hsl(var(--dark-blue));
     font-weight: 700;
+  }
+  &:hover {
+    color: hsl(var(--red));
+  }
+}
+.pannel-wrapper {
+  border-bottom: 1px solid hsl(var(--dark-blue) / 0.2);
+  width: 270px;
+
+  @include u.breakpoint-up(medium) {
+    width: 320px;
   }
 }
 .active {
   &:after {
     content: url("/images/icon-arrow-down.svg");
     float: right;
-    margin-left: 5px;
+    margin-left: u.rem(5);
     transform: rotate(180deg);
   }
 }
 .panel {
-  max-height: 0;
-  overflow: hidden;
-  -webkit-transition: max-height 0.4s ease-in-out, opacity 0.2s ease-in-out;
-  -o-transition: max-height 0.4s ease-in-out, opacity 0.2s ease-in-out;
-  transition: max-height 0.4s ease-in-out, opacity 0.2s ease-in-out;
-  border-bottom: 1px solid hsl(var(--dark-blue) / 0.2);
-
+  display: none;
   p {
     padding-bottom: u.rem(10);
     color: hsl(var(--dark-blue) / 0.7);
   }
+}
+.panel[aria-expanded="true"] {
+  max-height: u.rem(64);
+  display: block;
+}
+
+.panel[aria-expanded="false"] {
+  display: none;
+}
+
+.panel-text {
+  display: none;
+  p {
+    padding-bottom: u.rem(10);
+    color: hsl(var(--dark-blue) / 0.7);
+  }
+}
+.panel-text[aria-expanded="true"] {
+  max-height: 64px;
+  display: block;
+}
+
+.panel-text[aria-expanded="false"] {
+  display: none;
 }
